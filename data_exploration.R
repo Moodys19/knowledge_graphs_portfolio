@@ -593,6 +593,28 @@ league_clean <- teams_clean %>%
 ####### Save Datasets ----
 
 
-write.csv2(players_clean, file = "dataset/players_clean.csv")
-write.csv2(teams_clean, file = "dataset/teams_clean.csv")
-write.csv2(league_clean, file = "dataset/league_clean.csv")
+# TODO: key für league und teams machen
+
+write.csv2(players_clean, file = "dataset/players_clean.csv", row.names = FALSE)
+write.csv2(teams_clean, file = "dataset/teams_clean.csv", row.names = FALSE)
+write.csv2(league_clean, file = "dataset/league_clean.csv", row.names = FALSE)
+
+
+rm(list = ls())
+getwd()
+setwd("C:/mahmoud uni/TU/SS2024/KGs/Portfolio")
+# TODO: HIER pfad aktualisiereen
+
+library(tidyverse)
+library(stringr)
+
+players_clean <- read.csv2(file = "dataset/players_clean.csv")
+teams_clean <- read.csv2(file = "dataset/teams_clean.csv")
+league_clean <- read.csv2(file = "dataset/league_clean.csv")
+
+
+
+colnames(players_clean)
+colnames(teams_clean)
+colnames(league_clean)
+
