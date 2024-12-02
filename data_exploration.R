@@ -625,7 +625,7 @@ league_clean <- league_clean %>%
   mutate(
     league_key = paste0(league_id, "_", fifa_version)
   ) %>%
-  select(key, everything())
+  select(league_key, everything())
 
 
 library(arrow)
@@ -646,9 +646,35 @@ setwd("C:/mahmoud uni/TU/SS2024/KGs/Portfolio")
 
 library(tidyverse)
 library(stringr)
+library(arrow)
+
 
 players_clean <- read.csv2(file = "dataset/players_clean.csv")
 teams_clean <- read.csv2(file = "dataset/teams_clean.csv")
 league_clean <- read.csv2(file = "dataset/league_clean.csv")
 
 glimpse(players_clean)
+
+
+
+small_fifa <- c(21, 22, 23, 24)
+
+players_small <- players_clean %>%
+  filter(fifa_version %in% small_fifa)
+
+
+teams_small <- teams_clean %>%
+  filter(fifa_version %in% small_fifa)
+
+
+league_small <- league_clean %>%
+  filter(fifa_version %in% small_fifa)
+
+
+
+
+write_parquet(players_small, "dataset/players_small.parquet")
+write_parquet(teams_small, "dataset/teams_small.parquet")
+write_parquet(league_small,  "dataset/league_small.parquet")
+
+
