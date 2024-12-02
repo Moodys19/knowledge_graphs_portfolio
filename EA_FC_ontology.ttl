@@ -1,12 +1,12 @@
-@prefix : <http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6/> .
+@prefix : <http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@base <http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6/> .
+@base <http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/> .
 
-<http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6> rdf:type owl:Ontology .
+<http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology> rdf:type owl:Ontology .
 
 #################################################################
 #    Datatypes
@@ -20,7 +20,7 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#competes_in
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/competes_in
 :competes_in rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
              rdfs:domain :Club ,
@@ -34,7 +34,7 @@ xsd:date rdf:type rdfs:Datatype .
              rdfs:label "competes_in"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#plays_for
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/plays_for
 :plays_for rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf owl:topObjectProperty ;
            rdfs:domain :Player ;
@@ -47,7 +47,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "plays_for"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#plays_with
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/plays_with
 :plays_with rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:domain :Player ;
@@ -56,11 +56,20 @@ xsd:date rdf:type rdfs:Datatype .
             rdfs:label "plays_with"@en .
 
 
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/rival_with
+:rival_with rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :Club ;
+            rdfs:range :Club ;
+            rdfs:comment "rival of football team"@en ;
+            rdfs:label "rival_with"@en .
+
+
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#age
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/age
 :age rdf:type owl:DatatypeProperty ;
      rdfs:subPropertyOf owl:topDataProperty ;
      rdfs:domain :Player ;
@@ -69,12 +78,17 @@ xsd:date rdf:type rdfs:Datatype .
      rdfs:label "age"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#attack
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attack
 :attack rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf owl:topDataProperty .
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :Club ,
+                    :League ;
+        rdfs:range xsd:integer ;
+        rdfs:comment "attack rating of team, average attack rating for teams in league context (1-99)"@en ;
+        rdfs:label "attack"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#club_contract_valid_until_year
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/club_contract_valid_until_year
 :club_contract_valid_until_year rdf:type owl:DatatypeProperty ;
                                 rdfs:subPropertyOf owl:topDataProperty ;
                                 rdfs:domain :Player ;
@@ -83,7 +97,7 @@ xsd:date rdf:type rdfs:Datatype .
                                 rdfs:label "club_contract_valid_until_year"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#club_joined_date
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/club_joined_date
 :club_joined_date rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
                   rdfs:domain :Player ;
@@ -92,7 +106,7 @@ xsd:date rdf:type rdfs:Datatype .
                   rdfs:label "club_joined_date"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#club_position
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/club_position
 :club_position rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf owl:topDataProperty ;
                rdfs:domain :Player ;
@@ -101,17 +115,27 @@ xsd:date rdf:type rdfs:Datatype .
                rdfs:label "club_position"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#club_worth_eur
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/club_worth_eur
 :club_worth_eur rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf owl:topDataProperty .
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Club ,
+                            :League ;
+                rdfs:range xsd:float ;
+                rdfs:comment "club value, in league context average club value"@en ;
+                rdfs:label "club_worth_eur"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#defence
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/defence
 :defence rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf owl:topDataProperty .
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :Club ,
+                     :League ;
+         rdfs:range xsd:integer ;
+         rdfs:comment "defence rating for a team, average defence rating for teams in league (1-99)"@en ;
+         rdfs:label "defence"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#defending
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/defending
 :defending rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -120,12 +144,16 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "defending"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#domestic_prestige
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/domestic_prestige
 :domestic_prestige rdf:type owl:DatatypeProperty ;
-                   rdfs:subPropertyOf owl:topDataProperty .
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Club ;
+                   rdfs:range xsd:integer ;
+                   rdfs:comment "domestic prestige of a team (1-10)"@en ;
+                   rdfs:label "domestic_prestige"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#dribbling
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/dribbling
 :dribbling rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -134,7 +162,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "dribbling"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#fifa_version
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/fifa_version
 :fifa_version rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf owl:topDataProperty ;
               rdfs:domain :Club ,
@@ -145,7 +173,7 @@ xsd:date rdf:type rdfs:Datatype .
               rdfs:label "fifa_version"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#height_cm
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/height_cm
 :height_cm rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -154,32 +182,58 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "height_cm"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#international_prestige
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/international_prestige
 :international_prestige rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf owl:topDataProperty .
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:domain :Club ,
+                                    :League ;
+                        rdfs:range xsd:integer ;
+                        rdfs:comment """international prestige of a club or a league (1-10)
+in case of the league its a weighted average between average international prestige per club, transfer budget and club worth"""@en ;
+                        rdfs:label "international_prestige"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#league_id
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/league_id
 :league_id rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf owl:topDataProperty .
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:domain :League ;
+           rdfs:range xsd:string ;
+           rdfs:comment "leagues unique identifier"@en ;
+           rdfs:label "league_id"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#league_level
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/league_level
 :league_level rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf owl:topDataProperty .
+              rdfs:subPropertyOf owl:topDataProperty ;
+              rdfs:domain :League ;
+              rdfs:range xsd:integer ;
+              rdfs:comment """what level the league is
+1 - First Division
+2 - Second Division
+3 - Third Division"""@en ;
+              rdfs:label "league_level"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#league_nationality_name
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/league_nationality_name
 :league_nationality_name rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf owl:topDataProperty .
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :League ;
+                         rdfs:range xsd:string ;
+                         rdfs:comment "Nation of the league"@en ;
+                         rdfs:label "league_nationality_name"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#midfield
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/midfield
 :midfield rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf owl:topDataProperty .
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :Club ,
+                      :League ;
+          rdfs:range xsd:integer ;
+          rdfs:comment "midfield rating of team, average midfield rating for teams in league (1-99)"@en ;
+          rdfs:label "midfield"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#name
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/name
 :name rdf:type owl:DatatypeProperty ;
       rdfs:domain :Club ,
                   :League ,
@@ -189,7 +243,7 @@ xsd:date rdf:type rdfs:Datatype .
       rdfs:label "name"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#on_loan
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/on_loan
 :on_loan rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf owl:topDataProperty ;
          rdfs:domain :Player ;
@@ -198,7 +252,7 @@ xsd:date rdf:type rdfs:Datatype .
          rdfs:label "on_loan"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#overall
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/overall
 :overall rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf owl:topDataProperty ;
          rdfs:domain :Club ,
@@ -209,7 +263,7 @@ xsd:date rdf:type rdfs:Datatype .
          rdfs:label "overall"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#pace
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/pace
 :pace rdf:type owl:DatatypeProperty ;
       rdfs:subPropertyOf owl:topDataProperty ;
       rdfs:domain :Player ;
@@ -218,7 +272,7 @@ xsd:date rdf:type rdfs:Datatype .
       rdfs:label "pace"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#passing
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/passing
 :passing rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf owl:topDataProperty ;
          rdfs:domain :Player ;
@@ -227,7 +281,7 @@ xsd:date rdf:type rdfs:Datatype .
          rdfs:label "passing"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#physic
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/physic
 :physic rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf owl:topDataProperty ;
         rdfs:domain :Player ;
@@ -236,7 +290,7 @@ xsd:date rdf:type rdfs:Datatype .
         rdfs:label "physic"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#player_id
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/player_id
 :player_id rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -245,7 +299,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "player_id"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#player_positions
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/player_positions
 :player_positions rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty ;
                   rdfs:domain :Player ;
@@ -254,7 +308,7 @@ xsd:date rdf:type rdfs:Datatype .
                   rdfs:label "player_positions"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#potential
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/potential
 :potential rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -263,7 +317,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "potential"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#preferred_foot
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/preferred_foot
 :preferred_foot rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
                 rdfs:domain :Player ;
@@ -272,7 +326,7 @@ xsd:date rdf:type rdfs:Datatype .
                 rdfs:label "preferred_foot"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#shooting
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/shooting
 :shooting rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf owl:topDataProperty ;
           rdfs:domain :Player ;
@@ -281,7 +335,7 @@ xsd:date rdf:type rdfs:Datatype .
           rdfs:label "shooting"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#skill_moves
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/skill_moves
 :skill_moves rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf owl:topDataProperty ;
              rdfs:domain :Player ;
@@ -290,22 +344,35 @@ xsd:date rdf:type rdfs:Datatype .
              rdfs:label "skill_moves"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#starting_xi_average_age
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/starting_xi_average_age
 :starting_xi_average_age rdf:type owl:DatatypeProperty ;
-                         rdfs:subPropertyOf owl:topDataProperty .
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Club ;
+                         rdfs:range xsd:float ;
+                         rdfs:comment "average age of the starting 11"@en ;
+                         rdfs:label "starting_xi_average_age"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#team_id
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/team_id
 :team_id rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf owl:topDataProperty .
+         rdfs:subPropertyOf owl:topDataProperty ;
+         rdfs:domain :Club ;
+         rdfs:range xsd:string ;
+         rdfs:comment "teams unique identifier"@en ;
+         rdfs:label "team_id"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#transfer_budget_eur
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/transfer_budget_eur
 :transfer_budget_eur rdf:type owl:DatatypeProperty ;
-                     rdfs:subPropertyOf owl:topDataProperty .
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :Club ,
+                                 :League ;
+                     rdfs:range xsd:integer ;
+                     rdfs:comment "transfer budget of a club in euro, in case of a league the average budget per team in the league"@en ;
+                     rdfs:label "transfer_budget_eur"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#value_eur
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/value_eur
 :value_eur rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -314,7 +381,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "value_eur"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#wage_eur
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/wage_eur
 :wage_eur rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf owl:topDataProperty ;
           rdfs:domain :Player ;
@@ -323,7 +390,7 @@ xsd:date rdf:type rdfs:Datatype .
           rdfs:label "wage_eur"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#weak_foot
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/weak_foot
 :weak_foot rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -332,7 +399,7 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "weak_foot"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#weight_kg
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/weight_kg
 :weight_kg rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf owl:topDataProperty ;
            rdfs:domain :Player ;
@@ -341,25 +408,35 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "weight_kg"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6#whole_team_average_age
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/whole_team_average_age
 :whole_team_average_age rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf owl:topDataProperty .
+                        rdfs:subPropertyOf owl:topDataProperty ;
+                        rdfs:domain :Club ;
+                        rdfs:range xsd:float ;
+                        rdfs:comment "average age of the players in a team"@en ;
+                        rdfs:label "whole_team_average_age"@en .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6/Club
-:Club rdf:type owl:Class .
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/Club
+:Club rdf:type owl:Class ;
+      rdfs:comment "A football Club"@en ;
+      rdfs:label "Club"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6/League
-:League rdf:type owl:Class .
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/League
+:League rdf:type owl:Class ;
+        rdfs:comment "A football League"@en ;
+        rdfs:label "League"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/untitled-ontology-6/Player
-:Player rdf:type owl:Class .
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/Player
+:Player rdf:type owl:Class ;
+        rdfs:comment "A football player"@en ;
+        rdfs:label "Player" .
 
 
 #################################################################

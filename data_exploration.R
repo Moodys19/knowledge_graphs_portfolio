@@ -595,6 +595,31 @@ league_clean <- teams_clean %>%
 
 # TODO: key für league und teams machen
 
+
+players_clean <- players_clean %>%
+  mutate(
+    key = paste0(player_id, "_", fifa_version),
+    team_key = paste0(club_team_id, "_", fifa_version),
+    league_key = paste0(league_id, "_", fifa_version)
+  ) %>%
+  select(key,  colnames(players_clean)[1:15], team_key, colnames(players_clean)[17:19], league_key,everything())
+
+
+teams_clean <- teams_clean %>%
+  mutate(
+    key = paste0(team_id, "_", fifa_version),
+    league_key = paste0(league_id, "_", fifa_version)
+  ) %>%
+  select(key, everything())
+
+league_clean <- league_clean %>%
+  mutate(
+    key = paste0(league_id, "_", fifa_version)
+  ) %>%
+  select(key, everything())
+
+
+
 write.csv2(players_clean, file = "dataset/players_clean.csv", row.names = FALSE)
 write.csv2(teams_clean, file = "dataset/teams_clean.csv", row.names = FALSE)
 write.csv2(league_clean, file = "dataset/league_clean.csv", row.names = FALSE)
