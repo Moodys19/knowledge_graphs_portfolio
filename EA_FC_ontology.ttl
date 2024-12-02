@@ -47,15 +47,6 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "plays_for"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/plays_with
-:plays_with rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty ;
-            rdfs:domain :Player ;
-            rdfs:range :Player ;
-            rdfs:comment "Players play with each other as teammates"@en ;
-            rdfs:label "plays_with"@en .
-
-
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/rival_with
 :rival_with rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
@@ -86,6 +77,49 @@ xsd:date rdf:type rdfs:Datatype .
         rdfs:range xsd:integer ;
         rdfs:comment "attack rating of team, average attack rating for teams in league context (1-99)"@en ;
         rdfs:label "attack"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attacking_crossing
+:attacking_crossing rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :Player ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "attacking crossing rating of a player (1-99)"@en ;
+                    rdfs:label "attacking_crossing"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attacking_finishing
+:attacking_finishing rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:comment "attacking finishing rating of a player"@en ;
+                     rdfs:label "attacking_finishing"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attacking_heading_accuracy
+:attacking_heading_accuracy rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf owl:topDataProperty ;
+                            rdfs:domain :Player ;
+                            rdfs:range xsd:integer ;
+                            rdfs:comment "attacking heading accuracy rating of a player (1-99)"@en ;
+                            rdfs:label "attacking_heading_accuracy"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attacking_short_passing
+:attacking_short_passing rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Player ;
+                         rdfs:range xsd:integer ;
+                         rdfs:comment "attacking short passing rating of a player (1-99)"@en ;
+                         rdfs:label "attacking_short_passing"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/attacking_volleys
+:attacking_volleys rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Player ;
+                   rdfs:range xsd:integer ;
+                   rdfs:comment "attacking volleys rating of a player (1-99)"@en ;
+                   rdfs:label "attacking_volleys"@en .
 
 
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/club_contract_valid_until_year
@@ -144,6 +178,33 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:label "defending"@en .
 
 
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/defending_marking_awareness
+:defending_marking_awareness rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf owl:topDataProperty ;
+                             rdfs:domain :Player ;
+                             rdfs:range xsd:integer ;
+                             rdfs:comment "marking awareness of a player (1-99)"@en ;
+                             rdfs:label "defending_marking_awareness"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/defending_sliding_tackle
+:defending_sliding_tackle rdf:type owl:DatatypeProperty ;
+                          rdfs:subPropertyOf owl:topDataProperty ;
+                          rdfs:domain :Player ;
+                          rdfs:range xsd:integer ;
+                          rdfs:comment "sliding tackle ability of a player (1-99)"@en ;
+                          rdfs:label "defending_sliding_tackle"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/defending_standing_tackle
+:defending_standing_tackle rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf owl:topDataProperty ;
+                           rdfs:domain :Player ;
+                           rdfs:range xsd:integer ;
+                           rdfs:comment "standing tackle ability of a player (1-99)"@en ;
+                           rdfs:label "defending_standing_tackle"@en .
+
+
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/domestic_prestige
 :domestic_prestige rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf owl:topDataProperty ;
@@ -171,6 +232,60 @@ xsd:date rdf:type rdfs:Datatype .
               rdfs:range xsd:integer ;
               rdfs:comment "the fifa version the observation belongs to"@en ;
               rdfs:label "fifa_version"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_diving
+:goalkeeping_diving rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :Player ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "goalkeeping diving ability of a player (1-99)"@en ;
+                    rdfs:label "goalkeeping_diving"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_handling
+:goalkeeping_handling rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain :Player ;
+                      rdfs:range xsd:integer ;
+                      rdfs:comment "goalkeeping handling ability of a player (1-99)"@en ;
+                      rdfs:label "goalkeeping_handling"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_kicking
+:goalkeeping_kicking rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :Player ;
+                     rdfs:range xsd:integer ;
+                     rdfs:comment "goalkeeping kicking ability of a player (1-99)"@en ;
+                     rdfs:label "goalkeeping_kicking"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_positioning
+:goalkeeping_positioning rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Player ;
+                         rdfs:range xsd:integer ;
+                         rdfs:comment "goalkeeping positioning ability of a player (1-99)"@en ;
+                         rdfs:label "goalkeeping_positioning"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_reflexes
+:goalkeeping_reflexes rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain :Player ;
+                      rdfs:range xsd:integer ;
+                      rdfs:comment "goalkeeping reflex ability of a player (1-99)"@en ;
+                      rdfs:label "goalkeeping_reflexes"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/goalkeeping_speed
+:goalkeeping_speed rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Player ;
+                   rdfs:range xsd:integer ;
+                   rdfs:comment "goalkeeping speed of a player (1-99)"@en ;
+                   rdfs:label "goalkeeping_speed"@en .
 
 
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/height_cm
@@ -223,6 +338,60 @@ in case of the league its a weighted average between average international prest
                          rdfs:label "league_nationality_name"@en .
 
 
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_aggression
+:mentality_aggression rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf owl:topDataProperty ;
+                      rdfs:domain :Player ;
+                      rdfs:range xsd:integer ;
+                      rdfs:comment "aggression rating of a player (1-99)"@en ;
+                      rdfs:label "mentality_aggression"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_composure
+:mentality_composure rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :Player ;
+                     rdfs:range xsd:integer ;
+                     rdfs:comment "composure of a player (1-99)"@en ;
+                     rdfs:label "mentality_composure"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_interceptions
+:mentality_interceptions rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf owl:topDataProperty ;
+                         rdfs:domain :Player ;
+                         rdfs:range xsd:integer ;
+                         rdfs:comment "interception ability of a player (1-99)"@en ;
+                         rdfs:label "mentality_interceptions"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_penalties
+:mentality_penalties rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf owl:topDataProperty ;
+                     rdfs:domain :Player ;
+                     rdfs:range xsd:integer ;
+                     rdfs:comment "penalty ability of a player (1-99)"@en ;
+                     rdfs:label "mentality_penalties"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_positioning
+:mentality_positioning rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:domain :Player ;
+                       rdfs:range xsd:integer ;
+                       rdfs:comment "positioning ability of a player (1-99)"@en ;
+                       rdfs:label "mentality_positioning"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/mentality_vision
+:mentality_vision rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Player ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "vision ability of a player (1-99)"@en ;
+                  rdfs:label "mentality_vision"@en .
+
+
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/midfield
 :midfield rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf owl:topDataProperty ;
@@ -231,6 +400,51 @@ in case of the league its a weighted average between average international prest
           rdfs:range xsd:integer ;
           rdfs:comment "midfield rating of team, average midfield rating for teams in league (1-99)"@en ;
           rdfs:label "midfield"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/movement_acceleration
+:movement_acceleration rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:domain :Player ;
+                       rdfs:range xsd:integer ;
+                       rdfs:comment "acceleration rating of a player (1-99)"@en ;
+                       rdfs:label "movement_acceleration"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/movement_agility
+:movement_agility rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Player ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "agility rating of a player (1-99)"@en ;
+                  rdfs:label "movement_agility"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/movement_balance
+:movement_balance rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Player ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "balance rating of a player (1-99)"@en ;
+                  rdfs:label "movement_balance"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/movement_reactions
+:movement_reactions rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :Player ;
+                    rdfs:range xsd:integer ;
+                    rdfs:comment "reaction rating of a player (1-99)"@en ;
+                    rdfs:label "movement_reactions"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/movement_sprint_speed
+:movement_sprint_speed rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf owl:topDataProperty ;
+                       rdfs:domain :Player ;
+                       rdfs:range xsd:integer ;
+                       rdfs:comment "sprint speed rating of a player (1-99)"@en ;
+                       rdfs:label "movement_sprint_speed"@en .
 
 
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/name
@@ -299,13 +513,13 @@ in case of the league its a weighted average between average international prest
            rdfs:label "player_id"@en .
 
 
-###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/player_positions
-:player_positions rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf owl:topDataProperty ;
-                  rdfs:domain :Player ;
-                  rdfs:range xsd:string ;
-                  rdfs:comment "position of a player on the field (GK, DEF, MID, ATT, WING)"@en ;
-                  rdfs:label "player_positions"@en .
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/position_category
+:position_category rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Player ;
+                   rdfs:range xsd:string ;
+                   rdfs:comment "position of a player on the field (GK, DEF, MID, ATT, WING)"@en ;
+                   rdfs:label "position_category"@en .
 
 
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/potential
@@ -317,11 +531,56 @@ in case of the league its a weighted average between average international prest
            rdfs:label "potential"@en .
 
 
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/power_jumping
+:power_jumping rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :Player ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "jumping rating of a player (1-99)"@en ;
+               rdfs:label "power_jumping"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/power_long_shots
+:power_long_shots rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Player ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "long shots rating of a player (1-99)"@en ;
+                  rdfs:label "power_long_shots"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/power_shot_power
+:power_shot_power rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Player ;
+                  rdfs:range xsd:integer ;
+                  rdfs:comment "shot power rating of a player (1-99)"@en ;
+                  rdfs:label "power_shot_power"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/power_stamina
+:power_stamina rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf owl:topDataProperty ;
+               rdfs:domain :Player ;
+               rdfs:range xsd:integer ;
+               rdfs:comment "stamina rating of a player (1-99)"@en ;
+               rdfs:label "power_stamina"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/power_strength
+:power_strength rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Player ;
+                rdfs:range xsd:integer ;
+                rdfs:comment "strength rating of a player (1-99)"@en ;
+                rdfs:label "power_strength"@en .
+
+
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/preferred_foot
 :preferred_foot rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf owl:topDataProperty ;
                 rdfs:domain :Player ;
-                rdfs:range xsd:string ;
+                rdfs:range xsd:boolean ;
                 rdfs:comment "which foot is the players preferred/strong foot"@en ;
                 rdfs:label "preferred_foot"@en .
 
@@ -333,6 +592,33 @@ in case of the league its a weighted average between average international prest
           rdfs:range xsd:integer ;
           rdfs:comment "players shooting ability"@en ;
           rdfs:label "shooting"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/skill_curve
+:skill_curve rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf owl:topDataProperty ;
+             rdfs:domain :Player ;
+             rdfs:range xsd:integer ;
+             rdfs:comment "skill curve rating of a player (1-99)"@en ;
+             rdfs:label "skill_curve"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/skill_dribbling
+:skill_dribbling rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf owl:topDataProperty ;
+                 rdfs:domain :Player ;
+                 rdfs:range xsd:integer ;
+                 rdfs:comment "skill dribbling rating of a player (1-99)"@en ;
+                 rdfs:label "skill_dribbling"@en .
+
+
+###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/skill_fk_accuracy
+:skill_fk_accuracy rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf owl:topDataProperty ;
+                   rdfs:domain :Player ;
+                   rdfs:range xsd:integer ;
+                   rdfs:comment "skill fk accuracy rating of a player (1-99)"@en ;
+                   rdfs:label "skill_fk_accuracy"@en .
 
 
 ###  http://www.semanticweb.org/mabsa/ontologies/2024/10/ea-fc-ontology/skill_moves
@@ -415,6 +701,12 @@ in case of the league its a weighted average between average international prest
                         rdfs:range xsd:float ;
                         rdfs:comment "average age of the players in a team"@en ;
                         rdfs:label "whole_team_average_age"@en .
+
+
+###  http://www.w3.org/2002/07/owl#topDataProperty
+owl:topDataProperty rdfs:subPropertyOf owl:topDataProperty ;
+                    rdfs:domain :Player ;
+                    rdfs:range xsd:integer .
 
 
 #################################################################

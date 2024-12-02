@@ -42,11 +42,16 @@ red_cols <- c('fifa_update', 'update_as_of', 'short_name', 'club_jersey_number',
 
 manipulated_cols <- c('club_loaned_from')
 
+
+summary(players_df$club_loaned_from)
+sum(players_df$club_loaned_from == "")
+sum(players_df$club_loaned_from != "")
+
 players_clean <- players_df %>%
   select(-all_of(red_cols)) %>%
   mutate(
     club_joined_date = as.Date(club_joined_date),
-    on_loan = ifelse(is.na(club_loaned_from), 0, 1),
+    on_loan = ifelse(club_loaned_from == "", 0, 1),
     club_position = case_when(
       club_position == "RES" ~ 0,
       club_position == "SUB" ~ 1,
@@ -515,6 +520,7 @@ players_clean$club_joined_date <- as.Date(ifelse(
 players_clean <- players_clean %>%
   mutate(
     goalkeeping_speed = ifelse((position_category != "GK" & is.na(goalkeeping_speed)), 0, goalkeeping_speed),
+    goalkeeping_speed = round(goalkeeping_speed),
     pace = ifelse((position_category == "GK" & is.na(pace)), 0, pace),
     shooting = ifelse((position_category == "GK" & is.na(shooting)), 0, shooting),
     passing = ifelse((position_category == "GK" & is.na(passing)), 0, passing),
@@ -541,7 +547,8 @@ na_summary
 players_clean <- players_clean %>%
   group_by(position_category, age_group, overall_range) %>%  # Group by relevant columns, including age_group
   mutate(
-    mentality_composure = ifelse(is.na(mentality_composure), mean(mentality_composure, na.rm = TRUE), mentality_composure)
+    mentality_composure = ifelse(is.na(mentality_composure), mean(mentality_composure, na.rm = TRUE), mentality_composure),
+    mentality_composure = round(mentality_composure)
     ) %>%
   ungroup() %>% # Remove grouping
   mutate(mentality_composure = ifelse(is.na(mentality_composure), min(mentality_composure, na.rm = TRUE), mentality_composure)) #this concerns only two observations
@@ -600,24 +607,31 @@ players_clean <- players_clean %>%
   mutate(
     key = paste0(player_id, "_", fifa_version),
     team_key = paste0(club_team_id, "_", fifa_version),
-    league_key = paste0(league_id, "_", fifa_version)
+    league_key = paste0(league_id, "_", fifa_version),
+    preferred_foot = ifelse(preferred_foot == "Right", 1, 0)
   ) %>%
   select(key,  colnames(players_clean)[1:15], team_key, colnames(players_clean)[17:19], league_key,everything())
 
 
 teams_clean <- teams_clean %>%
   mutate(
-    key = paste0(team_id, "_", fifa_version),
+    team_key = paste0(team_id, "_", fifa_version),
+    league_key = paste0(league_id, "_", fifa_version),
+    rival_key = paste0(rival_team, "_", fifa_version)
+  ) %>%
+  select(team_key, everything())
+
+league_clean <- league_clean %>%
+  mutate(
     league_key = paste0(league_id, "_", fifa_version)
   ) %>%
   select(key, everything())
 
-league_clean <- league_clean %>%
-  mutate(
-    key = paste0(league_id, "_", fifa_version)
-  ) %>%
-  select(key, everything())
 
+library(arrow)
+write_parquet(players_clean, "dataset/players_clean.parquet")
+write_parquet(teams_clean, "dataset/teams_clean.parquet")
+write_parquet(league_clean,  "dataset/league_clean.parquet")
 
 
 write.csv2(players_clean, file = "dataset/players_clean.csv", row.names = FALSE)
@@ -637,9 +651,4 @@ players_clean <- read.csv2(file = "dataset/players_clean.csv")
 teams_clean <- read.csv2(file = "dataset/teams_clean.csv")
 league_clean <- read.csv2(file = "dataset/league_clean.csv")
 
-
-
-colnames(players_clean)
-colnames(teams_clean)
-colnames(league_clean)
-
+glimpse(players_clean)
