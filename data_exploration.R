@@ -653,24 +653,80 @@ players_clean <- read.csv2(file = "dataset/players_clean.csv")
 teams_clean <- read.csv2(file = "dataset/teams_clean.csv")
 league_clean <- read.csv2(file = "dataset/league_clean.csv")
 
-glimpse(players_clean)
+#glimpse(players_clean)
 
 
+
+####### Subsampling for Graph ----
+
+
+nrow(players_clean %>% filter(fifa_version == 24))
+
+
+unique(players_clean$fifa_version)
 
 small_fifa <- c(21, 22, 23, 24)
 
+select_player_prep <- players_clean %>%
+  select(key, player_id, long_name, fifa_version) %>%
+  filter(fifa_version %in% small_fifa) %>%
+  group_by(player_id) %>%
+  summarize(
+    N = n()
+  ) %>%
+  filter(N == max(N))
+
+
+
+select_player <- players_clean %>%
+  select(key, player_id, long_name, fifa_version, overall_range, age_group, position_category) %>%
+  filter(fifa_version %in% small_fifa) %>%
+  filter(player_id %in% select_player_prep$player_id)
+
+
+# Perform stratified sampling
+set.seed(1120) 
+
+# Ensure each combination is selected at least once
+initial_sample <- select_player %>%
+  group_by(overall_range, age_group, position_category) %>%
+  slice_sample(n = 1) %>% # we select at least 2 from each group
+  ungroup()
+
+# Calculate the remaining number of rows needed
+remaining_rows <- 202 - nrow(initial_sample)
+
+# Sample additional rows proportionally to the distribution
+additional_sample <- select_player %>%
+  anti_join(initial_sample, by = c("key", "player_id")) %>%  # Exclude already selected rows
+  group_by(overall_range, age_group) %>%
+  sample_frac(size = remaining_rows / nrow(select_player)) %>% 
+  ungroup()
+
+# Combine the two samples
+sampled_players_ids <- bind_rows(initial_sample, additional_sample)
+nrow(sampled_players)
+
+table(sampled_players$fifa_version)
+
 players_small <- players_clean %>%
-  filter(fifa_version %in% small_fifa)
+  filter(fifa_version %in% small_fifa) %>%
+  filter(player_id %in% sampled_players_ids$player_id)
+
+table(sampled_players$fifa_version)
 
 
-teams_small <- teams_clean %>%
-  filter(fifa_version %in% small_fifa)
+teams_small <- teams_clean %>% 
+  filter(team_key %in% unique(players_small$team_key))
 
 
 league_small <- league_clean %>%
-  filter(fifa_version %in% small_fifa)
+  filter(league_key %in% unique(teams_small$league_key)) 
 
 
+dim(players_small)
+dim(teams_small)
+dim(league_small)
 
 
 write_parquet(players_small, "dataset/players_small.parquet")
@@ -678,3 +734,5 @@ write_parquet(teams_small, "dataset/teams_small.parquet")
 write_parquet(league_small,  "dataset/league_small.parquet")
 
 
+# save sampled player names
+write.csv2(sampled_players %>% select(key), file = "dataset/selected_players_key", row.names = FALSE)
