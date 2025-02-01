@@ -703,17 +703,15 @@ additional_sample <- select_player %>%
   sample_frac(size = remaining_rows / nrow(select_player)) %>% 
   ungroup()
 
+# stell sicher das die spieler die gesampled werden für alle Versionen genommen werden
+
 # Combine the two samples
 sampled_players_ids <- bind_rows(initial_sample, additional_sample)
-nrow(sampled_players)
 
-table(sampled_players$fifa_version)
 
 players_small <- players_clean %>%
   filter(fifa_version %in% small_fifa) %>%
   filter(player_id %in% sampled_players_ids$player_id)
-
-table(sampled_players$fifa_version)
 
 
 teams_small <- teams_clean %>% 
@@ -735,4 +733,6 @@ write_parquet(league_small,  "dataset/league_small.parquet")
 
 
 # save sampled player names
-write.csv2(sampled_players %>% select(key), file = "dataset/selected_players_key", row.names = FALSE)
+
+
+write.csv2(sampled_players_ids %>% select(key), file = "dataset/selected_players_key.csv", row.names = FALSE)

@@ -3,6 +3,10 @@ For this project I will be using the EA Sports FC 24 complete player dataset fro
 I will not be able to implement the original proposal due to issues in finding useful data within the time constraints 
 I am facing. Thus I will be adapting my approach: Wir schauen uns das [EA Sports FC 24 complete player dataset](https://www.kaggle.com/datasets/stefanoleone992/ea-sports-fc-24-complete-player-dataset/?select=male_teams.csv). Die idee ist das wir das ganze bauen und wenn das für diesen Datensatz funktioniert dann sollte das auch für echte Daten funktionieren.
 
+
+Wir predicten potential, hier ist das ein regression task, im real life könnte man hier klar ein Classfication Task draus machen.
+
+
 ## KG Generation
 Nodes:
 
@@ -25,3 +29,6 @@ Edges:
         Connect teams to leagues (club_team_id → league_id).
     Optional:
         League-Has-Player: A direct connection between players and leagues, if needed for analysis.
+
+
+TODO: yaml am schluss updaten
