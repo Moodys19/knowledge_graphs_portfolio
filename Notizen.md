@@ -32,3 +32,16 @@ Edges:
 
 
 TODO: yaml am schluss updaten
+
+
+das ganze kann man das mit den Verletzungen als data properties auch machen wenn alles klappt
+
+
+Lernziele:
+    - financial: fußball ist ein milionengeschäft - insights könnten sehr relvante für clubs sein yada yada
+    - Embeddings - erkläre was das ist und dass wir das verwenden könnten um Vereine und Spieler zu clustern 
+
+
+Challenges:
+    - Daten größe -> KG zu groß zum runnen der Modelle
+    - Train/Test split muss sofisticated sein
