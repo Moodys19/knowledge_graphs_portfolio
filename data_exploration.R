@@ -690,11 +690,11 @@ set.seed(1120)
 # Ensure each combination is selected at least once
 initial_sample <- select_player %>%
   group_by(overall_range, age_group, position_category) %>%
-  slice_sample(n = 3) %>% 
+  slice_sample(n = 5) %>% 
   ungroup()
 
 # Calculate the remaining number of rows needed
-remaining_rows <- 800 - nrow(initial_sample)
+remaining_rows <- 1000 - nrow(initial_sample)
 
 # Sample additional rows proportionally to the distribution
 additional_sample <- select_player %>%
@@ -733,6 +733,4 @@ write_parquet(league_small,  "dataset/league_small.parquet")
 
 
 # save sampled player names
-
-
 write.csv2(sampled_players_ids %>% select(key), file = "dataset/selected_players_key.csv", row.names = FALSE)

@@ -48,3 +48,4 @@ Challenges:
     - Daten größe -> KG zu groß zum runnen der Modelle
     - Train/Test split muss sofisticated sein
 
+No large gap between training and validation loss → No strong sign of overfitting und daher kein Dropout!.
