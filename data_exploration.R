@@ -690,11 +690,11 @@ set.seed(1120)
 # Ensure each combination is selected at least once
 initial_sample <- select_player %>%
   group_by(overall_range, age_group, position_category) %>%
-  slice_sample(n = 1) %>% # we select at least 2 from each group
+  slice_sample(n = 3) %>% 
   ungroup()
 
 # Calculate the remaining number of rows needed
-remaining_rows <- 202 - nrow(initial_sample)
+remaining_rows <- 800 - nrow(initial_sample)
 
 # Sample additional rows proportionally to the distribution
 additional_sample <- select_player %>%

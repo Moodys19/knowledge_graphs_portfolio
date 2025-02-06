@@ -31,7 +31,9 @@ Edges:
         League-Has-Player: A direct connection between players and leagues, if needed for analysis.
 
 
-TODO: yaml am schluss updaten
+TODO:
+    - yaml am schluss updaten
+    - comments managen
 
 
 das ganze kann man das mit den Verletzungen als data properties auch machen wenn alles klappt
@@ -45,3 +47,4 @@ Lernziele:
 Challenges:
     - Daten größe -> KG zu groß zum runnen der Modelle
     - Train/Test split muss sofisticated sein
+
