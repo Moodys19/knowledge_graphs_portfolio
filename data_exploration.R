@@ -3,12 +3,9 @@
 ###############################################################################_
 
 #' All the initial data exploration and manipulation is handled in this file.
-#' TODO: Eine Beschreibung des Datensatzes hierhin
-
 rm(list = ls())
 getwd()
 setwd("C:/mahmoud uni/TU/SS2024/KGs/Portfolio")
-# TODO: HIER pfad aktualisiereen
 
 library(tidyverse)
 library(stringr)
@@ -62,10 +59,10 @@ players_clean <- players_df %>%
   ) %>%
   select(-all_of(manipulated_cols))
 
-#' club_position hat das Problem das wenn Spieler verletzt sind oder sonst was 
-#' die nicht in der Aufstellung sind obwohl sie eigentlisch Stammspieler sind (De Bruyne z.B.) 
-#' irl müsste man ein anderes Scoring verwenden -> z.B.: ratio starting XI (oder > 30 min played) zu games available
-
+#' club_position has the issue that if players are injured or unavailable for some reason,
+#' they won’t be in the lineup even though they are actually regular starters (e.g., De Bruyne).
+#' In reality, a different scoring method should be used → e.g., the ratio of starting XI appearances
+#' to games available (or > 60 minutes/game played) .
 
 
 #' mapping function used to map the more granular positions to the categories
@@ -81,7 +78,7 @@ players_clean <- players_df %>%
 
 map_position <- function(position) {
   if (is.na(position)) {
-    return(NA)  # Keep NAs as they are
+    return(NA)
   }
   first_position <- str_split(position, ", ")[[1]][1]  # Get the first position
   if (first_position == "GK") {
@@ -116,9 +113,6 @@ league_check <- players_clean %>%
 
 unique(players_clean$league_name) # also there is one empty league name
 
-
-
-
 #### teams df
 colnames(teams_df)
 
@@ -151,9 +145,6 @@ teams_clean <- teams_df %>%
     
   ) %>%
   select(-nationality_name)
-  
-
-
 
 
 ##############################_
@@ -161,7 +152,7 @@ teams_clean <- teams_df %>%
 
 free_agent_cols <- c("league_name", "club_name")
 check_names <- players_clean %>%
-  select(key, where(~ !is.numeric(.))) %>%  # Select only non-numeric columns
+  select(key, where(~ !is.numeric(.))) %>%
   filter(if_any(where(~ !is.numeric(.)), ~ . == "")) %>%
   filter(!if_any(any_of(free_agent_cols), ~ . == ""))
 
@@ -288,8 +279,8 @@ players_clean <- players_clean %>%
     age >= 18 & age <= 20 ~ "18-20",
     age >= 21 & age <= 25 ~ "18-20",
     age >= 25 & age <= 29 ~ "25-29",
-    age >= 30            ~ "30+",
-    TRUE                 ~ NA_character_  # Handle missing or invalid ages
+    age >= 30 ~ "30+",
+    TRUE ~ NA_character_ 
   ),
   
   overall_range = case_when(
@@ -311,7 +302,7 @@ players_clean <- players_clean %>%
 
 # Impute missing values in value_eur
 players_clean <- players_clean %>%
-  group_by(position_category, age_group, overall_range, league_level) %>%  # Group by relevant columns, including age_group
+  group_by(position_category, age_group, overall_range, league_level) %>% 
   mutate(value_eur = ifelse(is.na(value_eur), mean(value_eur, na.rm = TRUE), value_eur)) %>%
   ungroup() %>%# Remove grouping
   mutate(value_eur = ifelse(is.na(value_eur), min(value_eur, na.rm = TRUE), value_eur)) #this only concerns one observation
@@ -357,7 +348,7 @@ teams_clean <- teams_clean %>%
   select(-all_of(rem_miss)) 
 
 
-# presige is a bit weird for fifa versions 15 and 16 -> we will impute the prestige for these two years using the fifa 17
+# prestige is a bit weird for fifa versions 15 and 16 -> we will impute the prestige for these two years using the fifa 17
 fix_prestige_1516 <- teams_clean %>%
   select(team_id, team_name, league_name, fifa_version, domestic_prestige, international_prestige) %>%
   distinct() %>%
@@ -600,9 +591,6 @@ league_clean <- teams_clean %>%
 ####### Save Datasets ----
 
 
-# TODO: key für league und teams machen
-
-
 players_clean <- players_clean %>%
   mutate(
     key = paste0(player_id, "_", fifa_version),
@@ -629,9 +617,9 @@ league_clean <- league_clean %>%
 
 
 library(arrow)
-write_parquet(players_clean, "dataset/players_clean.parquet")
-write_parquet(teams_clean, "dataset/teams_clean.parquet")
-write_parquet(league_clean,  "dataset/league_clean.parquet")
+# write_parquet(players_clean, "dataset/players_clean.parquet")
+# write_parquet(teams_clean, "dataset/teams_clean.parquet")
+# write_parquet(league_clean,  "dataset/league_clean.parquet")
 
 
 write.csv2(players_clean, file = "dataset/players_clean.csv", row.names = FALSE)
@@ -642,7 +630,6 @@ write.csv2(league_clean, file = "dataset/league_clean.csv", row.names = FALSE)
 rm(list = ls())
 getwd()
 setwd("C:/mahmoud uni/TU/SS2024/KGs/Portfolio")
-# TODO: HIER pfad aktualisiereen
 
 library(tidyverse)
 library(stringr)
@@ -655,16 +642,10 @@ league_clean <- read.csv2(file = "dataset/league_clean.csv")
 
 #glimpse(players_clean)
 
-
-
 ####### Subsampling for Graph ----
 
-
 nrow(players_clean %>% filter(fifa_version == 24))
-
-
 unique(players_clean$fifa_version)
-
 small_fifa <- c(21, 22, 23, 24)
 
 select_player_prep <- players_clean %>%
@@ -676,38 +657,30 @@ select_player_prep <- players_clean %>%
   ) %>%
   filter(N == max(N))
 
-
-
 select_player <- players_clean %>%
   select(key, player_id, long_name, fifa_version, overall_range, age_group, position_category) %>%
   filter(fifa_version %in% small_fifa) %>%
   filter(player_id %in% select_player_prep$player_id)
 
 
-# Perform stratified sampling
+##### stratified sampling
 set.seed(1120) 
 
-# Ensure each combination is selected at least once
 initial_sample <- select_player %>%
   group_by(overall_range, age_group, position_category) %>%
-  slice_sample(n = 5) %>% 
+  slice_sample(n = 5) %>% # ensures that each combi is selcted 5 times
   ungroup()
 
-# Calculate the remaining number of rows needed
+# fill up remaining rows
 remaining_rows <- 1000 - nrow(initial_sample)
 
-# Sample additional rows proportionally to the distribution
 additional_sample <- select_player %>%
   anti_join(initial_sample, by = c("key", "player_id")) %>%  # Exclude already selected rows
   group_by(overall_range, age_group) %>%
   sample_frac(size = remaining_rows / nrow(select_player)) %>% 
   ungroup()
 
-# stell sicher das die spieler die gesampled werden für alle Versionen genommen werden
-
-# Combine the two samples
 sampled_players_ids <- bind_rows(initial_sample, additional_sample)
-
 
 players_small <- players_clean %>%
   filter(fifa_version %in% small_fifa) %>%
@@ -731,6 +704,5 @@ write_parquet(players_small, "dataset/players_small.parquet")
 write_parquet(teams_small, "dataset/teams_small.parquet")
 write_parquet(league_small,  "dataset/league_small.parquet")
 
-
-# save sampled player names
+# for manual checkup
 write.csv2(sampled_players_ids %>% select(key), file = "dataset/selected_players_key.csv", row.names = FALSE)

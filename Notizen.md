@@ -49,3 +49,9 @@ Challenges:
     - Train/Test split muss sofisticated sein
 
 No large gap between training and validation loss → No strong sign of overfitting und daher kein Dropout!.
+
+
+issues with the dataset:
+    club_position hat das Problem das wenn Spieler verletzt sind oder sonst was 
+    #' die nicht in der Aufstellung sind obwohl sie eigentlisch Stammspieler sind (De Bruyne z.B.) 
+    #' irl müsste man ein anderes Scoring verwenden -> z.B.: ratio starting XI (oder > 30 min played) zu games available
