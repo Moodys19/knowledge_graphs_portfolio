@@ -277,7 +277,7 @@ players_clean <- players_clean %>%
   mutate(age_group = case_when(
     age <= 18 ~ "18-",
     age >= 18 & age <= 20 ~ "18-20",
-    age >= 21 & age <= 25 ~ "18-20",
+    age >= 21 & age <= 25 ~ "21-24",
     age >= 25 & age <= 29 ~ "25-29",
     age >= 30 ~ "30+",
     TRUE ~ NA_character_ 
@@ -578,6 +578,7 @@ league_clean <- teams_clean %>%
       0.3 * norm_international_prestige +
       0.3 * norm_transfer_budget +
       0.6 * norm_club_worth,
+    # summiert sich auf >1 auf ABER durchs runden geht das gut
     
     international_prestige = round(international_prestige)
     
@@ -668,11 +669,11 @@ set.seed(1120)
 
 initial_sample <- select_player %>%
   group_by(overall_range, age_group, position_category) %>%
-  slice_sample(n = 5) %>% # ensures that each combi is selcted 5 times
+  slice_sample(n = 10) %>% # ensures that each combi is selcted 5 times
   ungroup()
 
 # fill up remaining rows
-remaining_rows <- 1000 - nrow(initial_sample)
+remaining_rows <- 2000 - nrow(initial_sample)
 
 additional_sample <- select_player %>%
   anti_join(initial_sample, by = c("key", "player_id")) %>%  # Exclude already selected rows
