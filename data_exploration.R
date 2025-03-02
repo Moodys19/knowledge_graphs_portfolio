@@ -667,26 +667,28 @@ select_player <- players_clean %>%
 ##### stratified sampling
 set.seed(1120) 
 
-initial_sample <- select_player %>%
+
+# früher initial_sample
+sampled_players_ids <- select_player %>%
   group_by(overall_range, age_group, position_category) %>%
-  slice_sample(n = 10) %>% # ensures that each combi is selcted 5 times
+  slice_sample(n = 20) %>% # ensures that each combi is selcted 20 times
   ungroup()
 
-# fill up remaining rows
-remaining_rows <- 2000 - nrow(initial_sample)
+# remaining_rows <- 2000 - nrow(initial_sample)
+# 
+# additional_sample <- select_player %>%
+#   anti_join(initial_sample, by = c("key", "player_id")) %>%  # Exclude already selected rows
+#   group_by(overall_range, age_group) %>%
+#   sample_frac(size = remaining_rows / nrow(select_player)) %>% 
+#   ungroup()
 
-additional_sample <- select_player %>%
-  anti_join(initial_sample, by = c("key", "player_id")) %>%  # Exclude already selected rows
-  group_by(overall_range, age_group) %>%
-  sample_frac(size = remaining_rows / nrow(select_player)) %>% 
-  ungroup()
-
-sampled_players_ids <- bind_rows(initial_sample, additional_sample)
+#sampled_players_ids <- bind_rows(initial_sample, additional_sample)
 
 players_small <- players_clean %>%
   filter(fifa_version %in% small_fifa) %>%
   filter(player_id %in% sampled_players_ids$player_id)
 
+length(unique(players_small$player_id))
 
 teams_small <- teams_clean %>% 
   filter(team_key %in% unique(players_small$team_key))
