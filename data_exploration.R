@@ -709,3 +709,11 @@ write_parquet(league_small,  "dataset/league_small.parquet")
 
 # for manual checkup
 write.csv2(sampled_players_ids %>% select(key), file = "dataset/selected_players_key.csv", row.names = FALSE)
+
+
+###### Potential stats
+
+
+summary(players_small$potential)
+plot(density(players_small$potential))
+boxplot(players_small$potential)
